@@ -18,6 +18,9 @@ library("affy")
 library("makecdfenv")
 library("limma")
 library("pheatmap")
+library("tidyr")
+library("ggplot2")
+source("R/hello.R")
 
 ts<-format(Sys.time(), "%a_%b_%d_%Y_%H%M")
 cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
@@ -455,3 +458,59 @@ annotated_tT[grep("SALL4",annotated_tT$Gene),]
     ##              Name  Gene                 Source.Seq
     ## 12644 contig82542 SALL4  sal-like 4 [Homo sapiens]
     ## 12645 contig91317 SALL4  sal-like 4 [Homo sapiens]
+
+Add plotAxolotl commands
+========================
+
+``` r
+axtl<-annotated_tT
+rownames(axtl)<-axtl$Row.names
+
+#plot logFCs for SALL4, COL1A1, COL12A1
+plotAxtl("SALL4")
+```
+
+![](README_files/figure-markdown_github/unnamed-chunk-16-1.png)
+
+``` r
+plotAxtl("COL1A1")
+```
+
+![](README_files/figure-markdown_github/unnamed-chunk-16-2.png)
+
+``` r
+plotAxtl("COL12A1")
+```
+
+![](README_files/figure-markdown_github/unnamed-chunk-16-3.png)
+
+``` r
+#Combine human datasets with v3
+plotAxtlv3("SALL4")
+```
+
+    ## [1] "Warning:  Combining GSE28914 and GSE50425 data."
+
+![](README_files/figure-markdown_github/unnamed-chunk-16-4.png) ![](README_files/figure-markdown_github/unnamed-chunk-16-5.png)
+
+    ## [1] "2 probe(s) found for gene SALL4:  axo17557-f_at,axo17558-f_at"
+
+``` r
+plotAxtlv3("COL1A1")
+```
+
+    ## [1] "Warning:  Combining GSE28914 and GSE50425 data."
+
+![](README_files/figure-markdown_github/unnamed-chunk-16-6.png) ![](README_files/figure-markdown_github/unnamed-chunk-16-7.png)
+
+    ## [1] "2 probe(s) found for gene COL1A1:  axo20347-f_s_at,axo20348-f_s_at"
+
+``` r
+plotAxtlv3("COL12A1")
+```
+
+    ## [1] "Warning:  Combining GSE28914 and GSE50425 data."
+
+![](README_files/figure-markdown_github/unnamed-chunk-16-8.png) ![](README_files/figure-markdown_github/unnamed-chunk-16-9.png) ![](README_files/figure-markdown_github/unnamed-chunk-16-10.png) ![](README_files/figure-markdown_github/unnamed-chunk-16-11.png) ![](README_files/figure-markdown_github/unnamed-chunk-16-12.png)
+
+    ## [1] "5 probe(s) found for gene COL12A1:  axo00381-f_at,axo00382-f_at,axo00383-f_at,axo10008-f_at,axo10009-f_at"

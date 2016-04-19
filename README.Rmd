@@ -222,8 +222,8 @@ plot(annotated_tT_dpi21$logFC,-log10(annotated_tT_dpi21$adj.P.Val),
 write.csv(annotated_tT,file="my_micrarray_data.csv",quote=F,row.names=F)
 ```
 
-#Heatmap
-```{r}
+#Heatmaps
+```{r totalHeatmap,fig.height=12,fig.width=8}
 load("human_data.rdata")
 at<-annotated_tT
 #at<-at[at$adj.P.Val <0.05 & (abs(at$dpi2_Log2FC) > 4 | abs(at$dpi14_Log2FC) > 4 | abs(at$dpi21_Log2FC) > 4),]
@@ -242,7 +242,11 @@ at[grep("SALL4",at$Gene),]
 results<-pheatmap(at[,2:4],labels_row=at$Gene,cluster_cols=F)
 temp<-temp[!duplicated(temp$symbol),]
 dim(temp)
+```
 
+#Subset to genes that had a <0.1 logFC at 3dpi in human GSE28914 dataset 
+This will highlight genes that change in Axolotl that don't change (immediately) in human data
+```{r Figure1,fig.height=12,fig.width=8}
 temp2<-merge(at,temp,by.x="Gene",by.y="symbol")
 dim(temp2)
 temp2<-temp2[temp2$abs<0.1,]

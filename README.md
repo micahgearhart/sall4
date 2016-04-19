@@ -325,8 +325,8 @@ Your done! Write out a table!
 write.csv(annotated_tT,file="my_micrarray_data.csv",quote=F,row.names=F)
 ```
 
-Heatmap
-=======
+Heatmaps
+========
 
 ``` r
 load("human_data.rdata")
@@ -374,7 +374,7 @@ at[grep("SALL4",at$Gene),]
 results<-pheatmap(at[,2:4],labels_row=at$Gene,cluster_cols=F)
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-15-1.png)
+![](README_files/figure-markdown_github/totalHeatmap-1.png)
 
 ``` r
 temp<-temp[!duplicated(temp$symbol),]
@@ -382,6 +382,11 @@ dim(temp)
 ```
 
     ## [1] 538   5
+
+Subset to genes that had a \<0.1 logFC at 3dpi in human GSE28914 dataset
+========================================================================
+
+This will highlight genes that change in Axolotl that don't change (immediately) in human data
 
 ``` r
 temp2<-merge(at,temp,by.x="Gene",by.y="symbol")
@@ -411,7 +416,7 @@ temp2[grep("SALL4",temp2$Gene),]
 results<-pheatmap(temp2[,c(3:5)],labels_row=temp2$Gene,cluster_cols=F)
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-15-2.png)
+![](README_files/figure-markdown_github/Figure1-1.png)
 
 ``` r
 results
@@ -470,19 +475,19 @@ rownames(axtl)<-axtl$Row.names
 plotAxtl("SALL4")
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-16-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-15-1.png)
 
 ``` r
 plotAxtl("COL1A1")
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-16-2.png)
+![](README_files/figure-markdown_github/unnamed-chunk-15-2.png)
 
 ``` r
 plotAxtl("COL12A1")
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-16-3.png)
+![](README_files/figure-markdown_github/unnamed-chunk-15-3.png)
 
 ``` r
 #Combine human datasets with v3
@@ -491,7 +496,7 @@ plotAxtlv3("SALL4")
 
     ## [1] "Warning:  Combining GSE28914 and GSE50425 data."
 
-![](README_files/figure-markdown_github/unnamed-chunk-16-4.png) ![](README_files/figure-markdown_github/unnamed-chunk-16-5.png)
+![](README_files/figure-markdown_github/unnamed-chunk-15-4.png) ![](README_files/figure-markdown_github/unnamed-chunk-15-5.png)
 
     ## [1] "2 probe(s) found for gene SALL4:  axo17557-f_at,axo17558-f_at"
 
@@ -501,7 +506,7 @@ plotAxtlv3("COL1A1")
 
     ## [1] "Warning:  Combining GSE28914 and GSE50425 data."
 
-![](README_files/figure-markdown_github/unnamed-chunk-16-6.png) ![](README_files/figure-markdown_github/unnamed-chunk-16-7.png)
+![](README_files/figure-markdown_github/unnamed-chunk-15-6.png) ![](README_files/figure-markdown_github/unnamed-chunk-15-7.png)
 
     ## [1] "2 probe(s) found for gene COL1A1:  axo20347-f_s_at,axo20348-f_s_at"
 
@@ -511,6 +516,6 @@ plotAxtlv3("COL12A1")
 
     ## [1] "Warning:  Combining GSE28914 and GSE50425 data."
 
-![](README_files/figure-markdown_github/unnamed-chunk-16-8.png) ![](README_files/figure-markdown_github/unnamed-chunk-16-9.png) ![](README_files/figure-markdown_github/unnamed-chunk-16-10.png) ![](README_files/figure-markdown_github/unnamed-chunk-16-11.png) ![](README_files/figure-markdown_github/unnamed-chunk-16-12.png)
+![](README_files/figure-markdown_github/unnamed-chunk-15-8.png) ![](README_files/figure-markdown_github/unnamed-chunk-15-9.png) ![](README_files/figure-markdown_github/unnamed-chunk-15-10.png) ![](README_files/figure-markdown_github/unnamed-chunk-15-11.png) ![](README_files/figure-markdown_github/unnamed-chunk-15-12.png)
 
     ## [1] "5 probe(s) found for gene COL12A1:  axo00381-f_at,axo00382-f_at,axo00383-f_at,axo10008-f_at,axo10009-f_at"
